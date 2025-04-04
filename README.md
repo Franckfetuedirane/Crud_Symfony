@@ -33,7 +33,7 @@ http://127.0.0.1:8000/register
 - Accédez à `/login` pour vous connecter.
 - Si vous n'avez pas de compte, cliquez sur "S'inscrire" pour aller à `/register`.
 - Une fois connecté, vous serez redirigé vers le tableau de bord et vous pourrez effectuer toutes les operations CRUD.
-
+- navigateur firefox deconseiller...
 ---
 
 ## Installation

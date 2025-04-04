@@ -9,9 +9,19 @@
     </h1>
 
     <div class="card shadow-sm p-4">
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button type="submit" class="btn btn-success w-100 mt-3">Créer</button>
+        {{ form_start(form, {'attr': {'class': 'needs-validation'}}) }}
+        <div class="row">
+            {% for field in form %}
+                <div class="col-md-6 mb-3">
+                    {{ form_label(field, null, {'label_attr': {'class': 'form-label fw-bold'}}) }}
+                    {{ form_widget(field, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(field, {'attr': {'class': 'text-danger'}}) }}
+                </div>
+            {% endfor %}
+        </div>
+        <button type="submit" class="btn btn-success w-100 mt-3">
+            <i class="fas fa-check"></i> Créer
+        </button>
         {{ form_end(form) }}
     </div>
 
