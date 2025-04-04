@@ -16,23 +16,13 @@ security:
             form_login:
                 login_path: app_login
                 check_path: app_login
-                enable_csrf: true # Active la protection CSRF
+                username_parameter: email
+                password_parameter: password
             logout:
                 path: app_logout
                 target: app_home
-            custom_authenticator: App\Security\LoginControllerAuthenticator
-            remember_me:
-                secret: '%kernel.secret%'
-                lifetime: 604800
-                path: /
-            entry_point: form_login
 
     access_control:
         - { path: ^/login, roles: PUBLIC_ACCESS }
         - { path: ^/register, roles: PUBLIC_ACCESS }
-        - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/, roles: ROLE_USER }
-
-framework:
-    session:
-        enabled: true

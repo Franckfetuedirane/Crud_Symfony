@@ -1,8 +1,8 @@
 # see https://symfony.com/doc/current/reference/configuration/framework.html
 framework:
-    secret: '%env(APP_SECRET)%'
     csrf_protection:
         enabled: true
+    secret: '%env(APP_SECRET)%'
     session:
         enabled: true
 

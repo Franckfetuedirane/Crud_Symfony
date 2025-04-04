@@ -29,21 +29,36 @@ final class UserController extends AbstractController{
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($user);
-            $entityManager->flush();
+            try {
+                $entityManager->persist($user);
+                $entityManager->flush();
 
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+                // Message de succès
+                $this->addFlash('success', 'Utilisateur ajouté avec succès.');
+
+                // Redirection vers la liste des utilisateurs
+                return $this->redirectToRoute('app_user_index');
+            } catch (\Exception $e) {
+                // Message d'erreur en cas de problème
+                $this->addFlash('error', 'Une erreur est survenue lors de l\'ajout de l\'utilisateur.');
+            }
         }
 
         return $this->render('user/new.html.twig', [
-            'user' => $user,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
-    #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
-    public function show(User $user): Response
+    #[Route('/{id}', name: 'app_user_show', requirements: ['id' => '\d+'], methods: ['GET'])]
+    public function show(int $id, EntityManagerInterface $entityManager): Response
     {
+        // Récupérer l'utilisateur par son ID
+        $user = $entityManager->getRepository(User::class)->find($id);
+
+        if (!$user) {
+            throw $this->createNotFoundException('Utilisateur non trouvé.');
+        }
+
         return $this->render('user/show.html.twig', [
             'user' => $user,
         ]);
