@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de l'utilisateur{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">
+        <i class="fas fa-user text-info"></i> Détails de l'utilisateur
+    </h1>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-info text-white">
+            <h4 class="mb-0">Informations de l'utilisateur</h4>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <th scope="row" class="bg-light">Id</th>
+                        <td>{{ user.id }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="bg-light">Nom</th>
+                        <td>{{ user.nom }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="bg-light">Email</th>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="bg-light">Mot de passe</th>
+                        <td>{{ user.motsDePasse }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="mt-4 d-flex justify-content-between">
+        <a href="{{ path('app_user_index') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Retour à la liste
+        </a>
+        <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-primary">
+            <i class="fas fa-edit"></i> Modifier
+        </a>
+        {{ include('user/_delete_form.html.twig', {'attr': {'class': 'd-inline'}}) }}
+    </div>
+</div>
+{% endblock %}
